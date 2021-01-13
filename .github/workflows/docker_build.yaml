@@ -12,10 +12,13 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
+      - run: |
+          gcloud config set project tmtest-k8s
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@master
         with:
-          project_id: ${PROJECT}
+          project_id: tmtest-k8s
+          service_account_email: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
           service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
           export_default_credentials: true
       - name: Configure docker to use the gcloud cli
