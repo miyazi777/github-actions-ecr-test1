@@ -4,9 +4,6 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-18.04
-    env:
-      PROJECT: tmtest-k8s
-      HOSTNAME: asia.gcr.io
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
@@ -21,6 +18,6 @@ jobs:
       - name: Configure docker to use the gcloud cli
         run: gcloud auth configure-docker --quiet
       - name: Build a docker image
-        run: docker build -t asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/hello-app:v2 .
+        run: docker build -t asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/hello-app:v3 .
       - name: Push the docker image
-        run: docker push asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/hello-app:v2
+        run: docker push asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/hello-app:v3
