@@ -2,8 +2,9 @@ name: docker_build
 on: [push]
 
 env:
-  GCP_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
-  GCP_REGION: ${{ secrets.GCP_REGION }}
+  PROJECT: tmtest-k8s
+  HOSTNAME: asia.gcr.io
+  REGION: asia-northeast1
 
 jobs:
   build:
@@ -20,6 +21,6 @@ jobs:
       - name: Configure docker to use the gcloud cli
         run: gcloud auth configure-docker --quiet
       - name: Build a docker image
-        run: docker build -t gcr.io/tmtest-k8s/hello-app:v1 .
+        run: docker build -t asia.gcr.io/tmtest-k8s/hello-app:v1 .
       - name: Push the docker image
-        run: docker push gcr.io/tmtest-k8s/hello-app:v1
+        run: docker push asia.gcr.io/tmtest-k8s/hello-app:v1
