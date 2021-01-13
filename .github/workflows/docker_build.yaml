@@ -7,7 +7,8 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
-      - run: gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
+      - name: Set gcloud config
+        run: gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@master
         with:
