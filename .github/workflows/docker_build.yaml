@@ -1,13 +1,12 @@
 name: docker_build
 on: [push]
 
-env:
-  PROJECT: tmtest-k8s
-  HOSTNAME: asia.gcr.io
-
 jobs:
   build:
     runs-on: ubuntu-18.04
+    env:
+      PROJECT: tmtest-k8s
+      HOSTNAME: asia.gcr.io
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
