@@ -3,6 +3,8 @@ on: [push]
 
 env:
   HOST_NAME: asia.gcr.io
+  APP_NAME: hello-app
+  APP_VERSION: v5
 
 jobs:
   build:
@@ -22,6 +24,6 @@ jobs:
       - name: Configure docker to use the gcloud cli
         run: gcloud auth configure-docker --quiet
       - name: Build a docker image
-        run: docker build -t ${HOST_NAME}/${{ secrets.GCP_PROJECT_ID }}/hello-app:v5 .
+        run: docker build -t ${HOST_NAME}/${{ secrets.GCP_PROJECT_ID }}/${APP_NAME}:${APP_VERSION} .
       - name: Push the docker image
-        run: docker push ${HOST_NAME}/${{ secrets.GCP_PROJECT_ID }}/hello-app:v5
+        run: docker push ${HOST_NAME}/${{ secrets.GCP_PROJECT_ID }}/${APP_NAME}:${APP_VERSION}
