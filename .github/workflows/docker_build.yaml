@@ -1,6 +1,9 @@
 name: docker_build
 on: [push]
 
+env:
+  HOST_NAME: asia.gcr.io
+
 jobs:
   build:
     runs-on: ubuntu-18.04
@@ -19,6 +22,6 @@ jobs:
       - name: Configure docker to use the gcloud cli
         run: gcloud auth configure-docker --quiet
       - name: Build a docker image
-        run: docker build -t asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/hello-app:v3 .
+        run: docker build -t ${HOST_NAME}/${{ secrets.GCP_PROJECT_ID }}/hello-app:v5 .
       - name: Push the docker image
-        run: docker push asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/hello-app:v3
+        run: docker push ${HOST_NAME}/${{ secrets.GCP_PROJECT_ID }}/hello-app:v5
